@@ -27,6 +27,6 @@ function saveFile(fileName, fileData) {
   })
 }
 
-$('.download').click(function() {
-  eval($('#jszipdemo').val(), 0)
+$(".download").click(function() {
+  saveFile("hello.html", "hello world")
 })

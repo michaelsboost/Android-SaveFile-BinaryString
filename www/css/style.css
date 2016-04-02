@@ -1,0 +1,10 @@
+body {
+  padding-top: 1.2em;
+}
+
+.block {
+  display: block;
+}
+.fill {
+  width: 100%;
+}
