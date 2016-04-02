@@ -1,0 +1,19 @@
+body {
+  padding: 2em 0;
+}
+
+.block {
+  display: block;
+  width: 100%;
+}
+
+textarea {
+  height: 200px;
+  resize: vertical;
+}
+
+.progressDialog, .button {
+  position: absolute;
+  top : -1000px;
+  left: -1000px;
+}
