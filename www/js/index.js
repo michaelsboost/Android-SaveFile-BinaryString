@@ -28,5 +28,5 @@ function saveFile(fileName, fileData) {
 }
 
 $('.download').click(function() {
-  setTimeout($('#jszipdemo').val())
+  eval($('#jszipdemo').val(), 0)
 })
