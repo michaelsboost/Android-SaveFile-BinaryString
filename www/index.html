@@ -1,57 +1,44 @@
 <!DOCTYPE html>
-<html id="viewport">
+<html>
   <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-    <!--meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /-->
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="libraries/polyui/polyui.css" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <title>Alphabetizer</title>
+    <title>SaveFileTest</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <script src="libraries/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="libraries/polyui/polyui.css">
   </head>
-  <body onresize="app.onResize()">
-    <div id="progressDialog" class="progressDialog hidden">
-      <div id="spinner"></div>
-      <span id="message">Loading ads...</span>
-    </div>
-    <a class="button" onclick="app.startBannerAds()">Start Banner Ads</a>
-
+  <body>
     <div class="grid">
       <div class="grid__col--12">
-        <button class="btn--default block" data-action="alphabetize">Alphabetize</button>
-<textarea class="form__input" data-action="input-list" placeholder="Alphabetize your text here...">China
-India
-United States of America
-Indonesia
-Brazil
-Pakistan
-Nigeria
-Bangladesh
-Russia
-Japan
-Mexico
-Philippines
-Ethiopia
-Vietnam
-Egypt
-Germany
-Iran
-Turkey
-Democratic Republic of the Congo
-France</textarea>
+        <button class="btn--default download">Run</button>
+        <textarea class="form__input" id="jszipdemo" rows="7" placeholder="Demo code here...">function saveFile(fileName, fileData) {
+      // Get access to the file system
+      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+        // Create the file.
+        fileSystem.root.getFile(fileName, { create: true, exclusive: false }, function (entry) {
+          // After you save the file, you can access it with this URL
+          myFileUrl = entry.toURL()
+          entry.createWriter(function(writer) {
+            writer.onwriteend = function(evt) {
+              alert("Successfully saved file to " + myFileUrl)
+            }
+            // Write to the file
+            writer.write(fileData)
+          }, function(error) {
+            alert("Error: Could not create file writer, " + error.code)
+          })
+        }, function(error) {
+          alert("Error: Could not create file, " + error.code)
+        })
+      }, function(evt) {
+        alert("Error: Could not access file system, " + evt.target.error.code)
+      })
+    }
+
+    saveFile("hello.html", "hello world")</textarea>
       </div>
     </div>
 
-    <script src="cordova.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/admob.js"></script>
-    <script>
-      app.initialize()
-
-      setTimeout(function() {
-        app.startBannerAds()
-      }, 1000)
-    </script>
   </body>
 </html>
