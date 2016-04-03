@@ -7,16 +7,37 @@
     <link rel="stylesheet" href="libraries/polyui/polyui.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="libraries/jquery/jquery.js"></script>
-    <script src="libraries/jszip/jszip.min.js"></script>
-    <script src="libraries/jszip/jszip-utils.js"></script>
-    <script src="libraries/jszip/FileSaver.js"></script>
-    <script src="libraries/jszip/Blob.js"></script>
     <script src="cordova.js"></script>
   </head>
   <body>
     <div class="grid">
       <div class="grid__col--12">
-        <a class="btn--default block fill download">Run</a>
+        <a class="btn--default block fill" data-action="download">Run</a>
+        <textarea class="form__input" rows="7" placeholder="Demo code here..." data-action="runstring">function saveFile(fileName, fileData) {
+  // Get access to the file system
+  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+    // Create the file.
+    fileSystem.root.getFile(fileName, { create: true, exclusive: false }, function (entry) {
+      // After you save the file, you can access it with this URL
+      var myFileUrl = entry.toURL()
+      entry.createWriter(function(writer) {
+        writer.onwriteend = function(evt) {
+          alert("Successfully saved file to " + myFileUrl)
+        }
+        // Write to the file
+        writer.write(fileData)
+      }, function(error) {
+        alert("Error: Could not create file writer, " + error.code)
+      })
+    }, function(error) {
+      alert("Error: Could not create file, " + error.code)
+    })
+  }, function(evt) {
+    alert("Error: Could not access file system, " + evt.target.error.code)
+  })
+}
+
+saveFile("hello.html", "hello world")</textarea>
       </div>
     </div>
 
